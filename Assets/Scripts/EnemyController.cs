@@ -11,6 +11,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        this.gameObject.transform.position += Vector3.left * (2 * Time.deltaTime);
     }
 }

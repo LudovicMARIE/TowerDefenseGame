@@ -8,8 +8,17 @@ public class TowerController : MonoBehaviour
     public GameObject rangeVisual; // range visualizer 3D object
     private CapsuleCollider capsuleCollider;
 
+    
+
     private List<GameObject> enemiesInRange = new List<GameObject>();
     private List<LineRenderer> lineRenderers = new List<LineRenderer>();
+
+    private GameObject newRange;
+
+    public GameObject projectilePrefab;
+    public float firingRate = 1000f; // Firing rate in milliseconds
+    public Vector3 firePoint; // Point where the projectile will be instantiated
+    private float fireCooldown; // Time tracking for firing cooldown
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +30,9 @@ public class TowerController : MonoBehaviour
             Debug.LogError("No CapsuleCollider found on this GameObject!");
             return;
         }
+        InitializeLineRenderers();
+        CreateRange(gameObject);
+
 
         if (rangeVisual != null)
         {
@@ -30,8 +42,9 @@ public class TowerController : MonoBehaviour
         {
             Debug.LogError("Range visual object is not assigned!");
         }
+        firePoint = transform.position + Vector3.up;
 
-        InitializeLineRenderers();
+
 
     }
 
@@ -39,9 +52,42 @@ public class TowerController : MonoBehaviour
     void Update()
     {
         UpdateLines();
+        fireCooldown -= Time.deltaTime * 1000f;
+        if (fireCooldown <= 0 && enemiesInRange.Count > 0)
+        {
+            FireAtEnemy(enemiesInRange[0]); // Fire at the first enemy in the list
+            fireCooldown = firingRate; // Reset cooldown
+        }
     }
 
 #region Range visualizer
+
+    private void CreateRange(GameObject cylinder)
+    {
+        // Ensure the cylinder has a CapsuleCollider
+        CapsuleCollider collider = cylinder.GetComponent<CapsuleCollider>();
+        if (collider == null)
+        {
+            Debug.LogError("Cylinder does not have a CapsuleCollider!");
+            return;
+        }
+
+        // Spawn the range sphere at the same position as the cylinder
+        GameObject rangeSphere = Instantiate(rangeVisual, cylinder.transform.position, Quaternion.identity);
+
+        // Calculate the scale based on the formula: 3 * X scale * CapsuleCollider radius
+        float calculatedScale = capsuleCollider.radius * 2 * 3;
+
+        // Apply the calculated scale to the range sphere
+        rangeSphere.transform.localScale = new Vector3(calculatedScale, calculatedScale, calculatedScale);
+
+        // Optionally, parent the range sphere to the cylinder
+        rangeSphere.transform.SetParent(cylinder.transform);
+
+        Debug.Log($"Range sphere created with scale: {calculatedScale}");
+    }
+
+
     private void UpdateVisualSize()
     {
         float radius = capsuleCollider.radius;
@@ -110,7 +156,7 @@ public class TowerController : MonoBehaviour
 #region Enemy attacked visualizer
     private void InitializeLineRenderers()
     {
-        for (int i = 0; i < 1; i++) // Create a pool of 10 LineRenderers
+        for (int i = 0; i < 10; i++) // Create a pool of 10 LineRenderers
         {
             GameObject lineObject = new GameObject("LineRenderer_" + i);
             lineObject.transform.SetParent(transform);
@@ -144,5 +190,28 @@ public class TowerController : MonoBehaviour
             }
         }
     }
-#endregion
+
+
+    private void FireAtEnemy(GameObject enemy)
+    {
+        if (enemy == null)
+        {
+            // Remove the enemy from the list if it no longer exists
+            enemiesInRange.Remove(enemy);
+            return;
+        }
+
+        // Create the projectile
+        GameObject projectile = Instantiate(projectilePrefab, firePoint, Quaternion.identity);
+
+        // Set the target for the projectile
+        Projectile projectileScript = projectile.GetComponent<Projectile>();
+        if (projectileScript != null)
+        {
+            projectileScript.target = enemy.transform;
+        }
+
+        Debug.Log($"Fired at {enemy.name}");
+    }
+    #endregion
 }

@@ -7,6 +7,7 @@ public class ClickTowerSlot : MonoBehaviour
 {
 
     private Camera mainCamera;
+    public GameObject towerToCreate;
 
     private void Start()
     {
@@ -26,15 +27,15 @@ public class ClickTowerSlot : MonoBehaviour
                 if (hit.collider.gameObject == gameObject)
                 {
                     Debug.Log($"{gameObject.name} was clicked!");
-                    HandleClick(); 
+                    CreateTower(); 
                     break; 
                 }
             }
         }
     }
 
-    private void HandleClick()
+    private void CreateTower()
     {
-        print($"You clicked on {gameObject.name}!");
+        Instantiate(towerToCreate, gameObject.transform.position, Quaternion.identity);
     }
 }
