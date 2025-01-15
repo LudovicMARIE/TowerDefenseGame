@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -8,16 +9,21 @@ public class PlayerController : MonoBehaviour
     public GameObject pauseMenuUI;
 
     public int gold = 10; 
-    public int score = 0; 
+    public int score = 0;
+    public int hp = 100;
 
     public int waveNumber; 
     public int numberOfEnemies;
+
+    public TextMeshProUGUI textMeshProHP; 
+    public TextMeshProUGUI textMeshProGold;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        textMeshProHP.text = "100/100";
+        textMeshProGold.text = gold.ToString();
     }
 
     // Update is called once per frame
@@ -40,11 +46,27 @@ public class PlayerController : MonoBehaviour
     public void AddGold(int amount)
     {
         gold += amount;
+
+        textMeshProGold.text = gold.ToString();
+    }
+
+    public void RemoveGold(int amount)
+    {
+        gold -= amount;
+
+        textMeshProGold.text = gold.ToString();
     }
 
     public void AddScore(int amount)
     {
         score += amount;
+    }
+
+
+    public void LoseHP(int amount)
+    {
+        hp -= amount;
+        textMeshProHP.text = hp.ToString() + " /100";
     }
 
     public void UpdateWaveInfo(int currentWave, int enemiesInWave)
