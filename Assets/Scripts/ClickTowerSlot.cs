@@ -36,5 +36,6 @@ public class ClickTowerSlot : MonoBehaviour
     private void CreateTower()
     {
         Instantiate(towerToCreate, gameObject.transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
     }
 }

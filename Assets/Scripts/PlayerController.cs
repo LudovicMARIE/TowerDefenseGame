@@ -4,6 +4,9 @@ using UnityEngine.SocialPlatforms.Impl;
 public class PlayerController : MonoBehaviour
 {
 
+    private bool isPaused = false; 
+    public GameObject pauseMenuUI;
+
     public int gold = 10; 
     public int score = 0; 
 
@@ -20,7 +23,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
     }
 
 
@@ -39,4 +52,38 @@ public class PlayerController : MonoBehaviour
         waveNumber = currentWave;
         numberOfEnemies = enemiesInWave;
     }
+
+
+    #region Pause
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0f; // Freeze game time
+        if (pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(true); // Show the pause menu
+        }
+        Debug.Log("Game Paused");
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f; // Resume game time
+        if (pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(false); // Hide the pause menu
+        }
+        Debug.Log("Game Resumed");
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting Game...");
+        Application.Quit(); // Quit the application
+    }
+
+
+    #endregion
 }

@@ -16,6 +16,7 @@ public class TowerController : MonoBehaviour
 
     private GameObject newRange;
     public int towerDamage;
+    public int towerLevel;
 
     public GameObject projectilePrefab;
     public float firingRate = 1000f; // Firing rate in milliseconds
