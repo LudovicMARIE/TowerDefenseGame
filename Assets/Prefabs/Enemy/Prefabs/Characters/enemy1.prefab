@@ -404,8 +404,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c4c46e18ad1bb4ab822daa670d606a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  hp: 6
+  speed: 2
+  hp: 4
+  timeAlive: 0
 --- !u!54 &-4049896579682114509
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -507,7 +508,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.040540695
         inSlope: 0
         outSlope: 0
         tangentMode: 0
