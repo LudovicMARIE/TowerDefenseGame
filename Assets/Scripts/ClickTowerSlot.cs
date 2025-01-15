@@ -26,7 +26,6 @@ public class ClickTowerSlot : MonoBehaviour
             {
                 if (hit.collider.gameObject == gameObject)
                 {
-                    Debug.Log($"{gameObject.name} was clicked!");
                     CreateTower(); 
                     break; 
                 }
@@ -37,5 +36,6 @@ public class ClickTowerSlot : MonoBehaviour
     private void CreateTower()
     {
         Instantiate(towerToCreate, gameObject.transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
     }
 }

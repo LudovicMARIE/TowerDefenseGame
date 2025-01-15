@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PathFollower : MonoBehaviour
 {
-    public Transform[] pathPoints; // Points du chemin ou peut être le transformer en Vector3 à voir
-    private int currentPointIndex = 0; // L'indice du point actuel que l'ennemi doit atteindre
+    public Transform[] pathPoints; 
+    private int currentPointIndex = 0; 
 
     private LineRenderer lineRenderer;
 
@@ -12,15 +12,9 @@ public class PathFollower : MonoBehaviour
     {
         GameObject[] pathpointObjects = GameObject.FindGameObjectsWithTag("Pathpoint");
         pathPoints = pathpointObjects
-            .OrderBy(obj => obj.name) // Sort alphabetically by name
-            .Select(obj => obj.transform) // Convert GameObject to Transform
+            .OrderBy(obj => obj.name) 
+            .Select(obj => obj.transform) 
             .ToArray();
-
-        // Debug: Log the found path points
-        foreach (var point in pathPoints)
-        {
-            Debug.Log($"Pathpoint added: {point.name}");
-        }
 
         lineRenderer = GetComponent<LineRenderer>();
         DrawPathLines();
@@ -47,7 +41,7 @@ public class PathFollower : MonoBehaviour
             }
             this.gameObject.transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-            /* Si l'ennemi atteint le point cible (avec une petite marge d'erreur)
+            /* Mirror if to add error margin
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             */
             

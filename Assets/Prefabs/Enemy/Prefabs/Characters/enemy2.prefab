@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  hp: 0
 --- !u!54 &-8300058765012462844
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -475,7 +476,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.040540695
         inSlope: 0
         outSlope: 0
         tangentMode: 0

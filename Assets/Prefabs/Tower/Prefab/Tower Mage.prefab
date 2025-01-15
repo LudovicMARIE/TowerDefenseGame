@@ -597,8 +597,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7.5
-  m_Height: 7.5
+  m_Radius: 4
+  m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1233985183603943364
@@ -614,6 +614,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeVisual: {fileID: 6440519997347275111, guid: 354484b5cac86614e931125328669f7c, type: 3}
-  projectilePrefab: {fileID: 8757686494557670575, guid: dbd5938a34297b0469c35ce85f469c9b, type: 3}
+  enemiesInRange: []
+  towerDamage: 2
+  projectilePrefab: {fileID: 765511271821131592, guid: cba2e9db35e7c2345af9854775dd8f64, type: 3}
   firingRate: 1000
-  firePoint: {x: 0, y: 5, z: 0}
+  firePoint: {x: 0, y: 4, z: 0}
+  fireCooldown: 0
