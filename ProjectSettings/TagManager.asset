@@ -9,6 +9,7 @@ TagManager:
   - Range
   - TowerSlot
   - Pathpoint
+  - Projectile
   layers:
   - Default
   - TransparentFX

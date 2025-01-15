@@ -5,6 +5,8 @@ public class EnemyController : MonoBehaviour
     public float speed;
     private PathFollower pathFollower;
 
+    public int hp;
+
     void Start()
     {
         pathFollower = GetComponent<PathFollower>();
@@ -22,5 +24,26 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // Ajouter d'autres fonctionnalités liées à l'ennemi, comme la gestion de la santé
+
+
+    #region Enemy stats
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        Debug.Log($"{gameObject.name} took {damage} damage, remaining HP: {hp}");
+
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    #endregion
+
 }
