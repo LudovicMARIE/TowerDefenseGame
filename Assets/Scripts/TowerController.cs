@@ -42,7 +42,7 @@ public class TowerController : MonoBehaviour
         {
             Debug.LogError("Range visual object is not assigned!");
         }
-        firePoint = transform.position + Vector3.up;
+        firePoint = firePoint + gameObject.transform.position;
 
 
 
@@ -182,7 +182,9 @@ public class TowerController : MonoBehaviour
             {
                 lineRenderers[i].enabled = true;
                 lineRenderers[i].SetPosition(0, transform.position); // Tower position
-                lineRenderers[i].SetPosition(1, enemiesInRange[i].transform.position); // Enemy position
+                if (enemiesInRange[i] != null) { 
+                    lineRenderers[i].SetPosition(1, enemiesInRange[i].transform.position); // Enemy position
+                }
             }
             else
             {

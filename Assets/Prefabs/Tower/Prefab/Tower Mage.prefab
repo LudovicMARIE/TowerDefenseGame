@@ -526,6 +526,8 @@ GameObject:
   m_Component:
   - component: {fileID: 411524}
   - component: {fileID: 9566220}
+  - component: {fileID: 8305882630978091345}
+  - component: {fileID: 1233985183603943364}
   m_Layer: 0
   m_Name: Tower Mage
   m_TagString: Untagged
@@ -543,7 +545,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 409546}
@@ -576,3 +578,42 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &8305882630978091345
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187918}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7.5
+  m_Height: 7.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1233985183603943364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac90efbadddac854b973fdbac27ed027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeVisual: {fileID: 6440519997347275111, guid: 354484b5cac86614e931125328669f7c, type: 3}
+  projectilePrefab: {fileID: 8757686494557670575, guid: dbd5938a34297b0469c35ce85f469c9b, type: 3}
+  firingRate: 1000
+  firePoint: {x: 0, y: 5, z: 0}

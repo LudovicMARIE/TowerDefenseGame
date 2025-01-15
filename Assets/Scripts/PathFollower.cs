@@ -36,6 +36,15 @@ public class PathFollower : MonoBehaviour
         if (!HasReachedEnd())
         {
             Vector3 targetPosition = pathPoints[currentPointIndex].position;
+
+            Vector3 directionToTarget = targetPosition - transform.position;
+
+            // Rotate towards the target
+            if (directionToTarget != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, speed * Time.deltaTime * 100); // Adjust the multiplier for smoother rotation
+            }
             this.gameObject.transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
             /* Si l'ennemi atteint le point cible (avec une petite marge d'erreur)
