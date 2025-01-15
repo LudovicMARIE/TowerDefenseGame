@@ -5,6 +5,8 @@ public class Projectile : MonoBehaviour
     public Transform target; // The target the projectile is traveling toward
     public float speed = 10f; // Speed of the projectile
 
+    public int damage;
+
     private void Update()
     {
         if (target == null)
@@ -27,8 +29,12 @@ public class Projectile : MonoBehaviour
 
     private void OnHit()
     {
-        // Destroy the projectile and optionally damage the target
+        EnemyController enemy = target.GetComponent<EnemyController>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage); 
+        }
+
         Destroy(gameObject);
-        Debug.Log("Projectile hit the target!");
     }
 }

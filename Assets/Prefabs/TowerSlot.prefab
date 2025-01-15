@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd1f9e83ea2ab0418d26604fa04c384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerToCreate: {fileID: 3603404324999854862, guid: 91296c68fbd71d24fab6372f4f9aec9a, type: 3}
+  towerToCreate: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}

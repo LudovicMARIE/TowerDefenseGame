@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Tower
   - Enemy
+  - Range
+  - TowerSlot
+  - Pathpoint
+  - Projectile
   layers:
   - Default
   - TransparentFX
