@@ -13,7 +13,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        // Find the spawn point (object named "Pos1" with tag "Pathpoint")
         GameObject spawnPointObject = GameObject.Find("Pos1");
         if (spawnPointObject != null && spawnPointObject.CompareTag("Pathpoint"))
         {
@@ -24,7 +23,6 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogError("Spawn point 'Pos1' with tag 'Pathpoint' not found!");
         }
 
-        // Start the first wave
         StartWave();
     }
 
@@ -42,6 +40,11 @@ public class EnemySpawner : MonoBehaviour
     {
         waveNumber++;
         Debug.Log($"Starting wave {waveNumber} with {enemiesPerWave} enemies.");
+        PlayerController playerController = FindAnyObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.UpdateWaveInfo(waveNumber, enemiesPerWave);
+        }
         SpawnEnemies();
     }
 
@@ -61,8 +64,8 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < enemiesPerWave; i++)
         {
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-            enemies.Add(newEnemy); // Track the spawned enemy
-            yield return new WaitForSeconds(1f); // Wait for 1 second before spawning the next enemy
+            enemies.Add(newEnemy); 
+            yield return new WaitForSeconds(1f);
         }
     }
 }

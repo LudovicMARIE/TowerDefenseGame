@@ -26,7 +26,6 @@ public class ClickTowerSlot : MonoBehaviour
             {
                 if (hit.collider.gameObject == gameObject)
                 {
-                    Debug.Log($"{gameObject.name} was clicked!");
                     CreateTower(); 
                     break; 
                 }

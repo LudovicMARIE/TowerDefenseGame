@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
 
     public int hp;
     public float timeAlive = 0f;
+    public int goldValue = 10;
+    public int scoreValue = 50;
 
     private HashSet<TowerController> towerControllers = new HashSet<TowerController>();
 
@@ -30,10 +32,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-
-
-    #region Enemy stats
-
     public void AddTowerController(TowerController controller)
     {
         towerControllers.Add(controller); // Add tower to the set
@@ -46,7 +44,6 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        Debug.Log($"{gameObject.name} took {damage} damage, remaining HP: {hp}");
 
         if (hp <= 0)
         {
@@ -60,9 +57,10 @@ public class EnemyController : MonoBehaviour
         {
             tower.RemoveEnemyFromRange(gameObject);
         }
+        FindAnyObjectByType<PlayerController>()?.AddGold(goldValue); // Example: Add 10 gold
+        FindAnyObjectByType<PlayerController>()?.AddScore(scoreValue); // Example: Add 100 score
         Destroy(gameObject);
     }
 
-    #endregion
 
 }
