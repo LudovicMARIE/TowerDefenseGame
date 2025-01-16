@@ -122,3 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerToCreate: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
+  towerMenuPrefab: {fileID: 7741298726640928201, guid: 8252b89374aae9e45a4d063b4359ee6b, type: 3}
+  currentSlot: {fileID: 0}
