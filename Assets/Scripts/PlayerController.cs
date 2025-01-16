@@ -7,14 +7,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isPaused = false; 
     public GameObject pauseMenuUI;
-    public GameObject gameOverUI;
-
-    private bool isGameOver = false;
 
     public int gold = 10; 
     public int score = 0;
-    public int hp = 10;
-    public int maxHP = 100;
+    public int hp = 100;
 
     public int waveNumber; 
     public int numberOfEnemies;
@@ -26,8 +22,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameOverUI.SetActive(false);
-        textMeshProHP.text = hp.ToString() + "/" + maxHP.ToString();
+        textMeshProHP.text = "100/100";
         textMeshProGold.text = gold.ToString();
     }
 
@@ -70,17 +65,8 @@ public class PlayerController : MonoBehaviour
 
     public void LoseHP(int amount)
     {
-        if(isGameOver) {
-            return;
-        }
-
         hp -= amount;
-        textMeshProHP.text = hp.ToString() + "/" + maxHP.ToString();
-        if(hp <= 0)
-        {
-            gameOverUI.SetActive(true);
-            isGameOver = true;
-        }
+        textMeshProHP.text = hp.ToString() + " /100";
     }
 
     public void UpdateWaveInfo(int currentWave, int enemiesInWave)
