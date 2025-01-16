@@ -407,6 +407,8 @@ MonoBehaviour:
   speed: 2
   hp: 4
   timeAlive: 0
+  goldValue: 1
+  scoreValue: 10
 --- !u!54 &-4049896579682114509
 Rigidbody:
   m_ObjectHideFlags: 0

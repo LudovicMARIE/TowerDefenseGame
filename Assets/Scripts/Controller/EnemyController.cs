@@ -8,8 +8,8 @@ public class EnemyController : MonoBehaviour
 
     public int hp;
     public float timeAlive = 0f;
-    public int goldValue = 10;
-    public int scoreValue = 50;
+    public int goldValue = 1;
+    public int scoreValue = 10;
 
     private HashSet<TowerController> towerControllers = new HashSet<TowerController>();
 
@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
         timeAlive += Time.deltaTime * 1000f;
         if (pathFollower.HasReachedEnd())
         {
+            FindAnyObjectByType<PlayerController>()?.LoseHP(1);
             Destroy(gameObject);
         }
         else
@@ -57,8 +58,8 @@ public class EnemyController : MonoBehaviour
         {
             tower.RemoveEnemyFromRange(gameObject);
         }
-        FindAnyObjectByType<PlayerController>()?.AddGold(goldValue); // Example: Add 10 gold
-        FindAnyObjectByType<PlayerController>()?.AddScore(scoreValue); // Example: Add 100 score
+        FindAnyObjectByType<PlayerController>()?.AddGold(goldValue); 
+        FindAnyObjectByType<PlayerController>()?.AddScore(scoreValue); 
         Destroy(gameObject);
     }
 
