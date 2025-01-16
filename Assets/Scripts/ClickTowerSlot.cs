@@ -9,13 +9,19 @@ public class ClickTowerSlot : MonoBehaviour
 {
 
     private Camera mainCamera;
+    public GameObject mageTower;
+    public GameObject sniperTower;
     public GameObject towerToCreate;
 
     public GameObject towerMenuPrefab;
     private GameObject instantiatedMenu;
 
+    public Button[] buttons;
+
     public GameObject currentSlot;
     private Button buyButton;
+    private Button mageTowerButton;
+    private Button sniperTowerButton;
     private PlayerController playerController;
 
     private void Start()
@@ -60,22 +66,48 @@ public class ClickTowerSlot : MonoBehaviour
 
         currentSlot = this.gameObject;
 
-        buyButton = instantiatedMenu.GetComponentInChildren<Button>();
+        buttons = instantiatedMenu.GetComponentsInChildren<Button>();
+
+        buyButton = buttons[0];
+        mageTowerButton = buttons[1];
+        sniperTowerButton = buttons[2];
 
         if (buyButton != null)
         {
             buyButton.onClick.RemoveAllListeners();
+            buyButton.onClick.AddListener(() => OnBuyButtonClicked());
+        }
 
-            buyButton.onClick.AddListener(() => OnMenuButtonClicked());
+
+        if (mageTowerButton != null)
+        {
+            mageTowerButton.onClick.RemoveAllListeners();
+            mageTowerButton.onClick.AddListener(() => chooseMageTower());
+        }
+
+        if (sniperTowerButton != null)
+        {
+            sniperTowerButton.onClick.RemoveAllListeners();
+            sniperTowerButton.onClick.AddListener(() => chooseSniperTower());
         }
 
     }
 
-    private void OnMenuButtonClicked()
+    private void OnBuyButtonClicked()
     {
         Debug.Log($"Menu button clicked for TowerSlot: {gameObject.name}");
         CreateTower(); 
         Destroy(instantiatedMenu);
+    }
+
+    private void chooseSniperTower()
+    {
+        towerToCreate = sniperTower;
+    }
+
+    private void chooseMageTower()
+    {
+        towerToCreate = mageTower;
     }
 
 

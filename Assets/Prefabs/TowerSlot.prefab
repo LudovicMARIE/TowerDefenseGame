@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd1f9e83ea2ab0418d26604fa04c384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mageTower: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
+  sniperTower: {fileID: 187918, guid: 68b8de42853ee2d4894733a46645d510, type: 3}
   towerToCreate: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
   towerMenuPrefab: {fileID: 7741298726640928201, guid: 8252b89374aae9e45a4d063b4359ee6b, type: 3}
   currentSlot: {fileID: 0}
