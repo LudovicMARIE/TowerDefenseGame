@@ -13,14 +13,14 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        GameObject spawnPointObject = GameObject.Find("Pos1");
+        GameObject spawnPointObject = GameObject.Find("Pos01");
         if (spawnPointObject != null && spawnPointObject.CompareTag("Pathpoint"))
         {
             spawnPoint = spawnPointObject.transform;
         }
         else
         {
-            Debug.LogError("Spawn point 'Pos1' with tag 'Pathpoint' not found!");
+            Debug.LogError("Spawn point 'Pos01' with tag 'Pathpoint' not found!");
         }
 
         StartWave();
@@ -64,7 +64,20 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < enemiesPerWave; i++)
         {
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
-            enemies.Add(newEnemy); 
+            enemies.Add(newEnemy);
+
+
+            EnemyController enemyController = newEnemy.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.hp = (float)(1 + (waveNumber * 0.2));
+                enemyController.goldValue = 1;
+                enemyController.scoreValue = 20;
+            }
+            else
+            {
+                Debug.LogError("EnemyController script not found on the spawned enemy!");
+            }
             yield return new WaitForSeconds(1f);
         }
     }

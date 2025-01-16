@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
     public float speed;
     private PathFollower pathFollower;
 
-    public int hp;
+    public float hp;
     public float timeAlive = 0f;
     public int goldValue = 1;
     public int scoreValue = 10;

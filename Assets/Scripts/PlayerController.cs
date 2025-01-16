@@ -6,11 +6,16 @@ public class PlayerController : MonoBehaviour
 {
 
     private bool isPaused = false; 
-    public GameObject pauseMenuUI;
+    public GameObject startMenuUI;
+    public GameObject HUD;
+    public GameObject gameOverUI;
+
+    private bool isGameOver = false;
 
     public int gold = 10; 
     public int score = 0;
-    public int hp = 100;
+    public int hp = 10;
+    public int maxHP = 10;
 
     public int waveNumber; 
     public int numberOfEnemies;
@@ -22,8 +27,15 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        textMeshProHP.text = "100/100";
+        gameOverUI.SetActive(false);
+
+        textMeshProHP.text = "10/10";
         textMeshProGold.text = gold.ToString();
+
+        startMenuUI = GameObject.FindGameObjectWithTag("PlayMenu");
+        HUD = GameObject.FindGameObjectWithTag("HUD");
+        HUD.SetActive(false);
+        PauseGame();
     }
 
     // Update is called once per frame
@@ -38,6 +50,22 @@ public class PlayerController : MonoBehaviour
             else
             {
                 PauseGame();
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (Time.timeScale == 1f)
+            {
+                Time.timeScale = 3f;
+            }
+            else 
+            {
+                if (Time.timeScale == 3f)
+                {
+                    Time.timeScale = 1f;
+                }
             }
         }
     }
@@ -65,8 +93,20 @@ public class PlayerController : MonoBehaviour
 
     public void LoseHP(int amount)
     {
+        if (isGameOver)
+        {
+            return;
+        }
         hp -= amount;
-        textMeshProHP.text = hp.ToString() + " /100";
+        textMeshProHP.text = hp.ToString() + "/" + maxHP.ToString();
+
+        if (hp <= 0)
+        {
+            gameOverUI.SetActive(true);
+            Time.timeScale = 0f;
+            isGameOver = true;
+            FindAnyObjectByType<AudioManager>().PlaySound("GameOver");
+        }
     }
 
     public void UpdateWaveInfo(int currentWave, int enemiesInWave)
@@ -82,9 +122,9 @@ public class PlayerController : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f; // Freeze game time
-        if (pauseMenuUI != null)
+        if (startMenuUI != null)
         {
-            pauseMenuUI.SetActive(true); // Show the pause menu
+            startMenuUI.SetActive(true); // Show the pause menu
         }
         Debug.Log("Game Paused");
     }
@@ -93,9 +133,13 @@ public class PlayerController : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f; // Resume game time
-        if (pauseMenuUI != null)
+        if (startMenuUI != null)
         {
-            pauseMenuUI.SetActive(false); // Hide the pause menu
+            startMenuUI.SetActive(false); // Hide the pause menu
+        }
+        if (HUD != null)
+        {
+            HUD.SetActive(true);
         }
         Debug.Log("Game Resumed");
     }

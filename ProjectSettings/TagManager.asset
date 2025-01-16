@@ -12,6 +12,8 @@ TagManager:
   - Projectile
   - Fireball
   - TowerMenu
+  - HUD
+  - PlayMenu
   layers:
   - Default
   - TransparentFX
