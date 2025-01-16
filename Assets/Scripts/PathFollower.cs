@@ -54,26 +54,26 @@ public class PathFollower : MonoBehaviour
 
     private void DrawPathLines()
     {
-        if (pathPoints == null || pathPoints.Length < 2)
-        {
-            Debug.LogWarning("Not enough points to draw a path.");
-            return;
-        }
+        //if (pathPoints == null || pathPoints.Length < 2)
+        //{
+        //    Debug.LogWarning("Not enough points to draw a path.");
+        //    return;
+        //}
 
-        // Set the number of points in the LineRenderer
-        lineRenderer.positionCount = pathPoints.Length;
+        //// Set the number of points in the LineRenderer
+        //lineRenderer.positionCount = pathPoints.Length;
 
-        // Assign the positions of the path points to the LineRenderer
-        for (int i = 0; i < pathPoints.Length; i++)
-        {
-            lineRenderer.SetPosition(i, pathPoints[i].position);
-        }
+        //// Assign the positions of the path points to the LineRenderer
+        //for (int i = 0; i < pathPoints.Length; i++)
+        //{
+        //    lineRenderer.SetPosition(i, pathPoints[i].position);
+        //}
 
-        // Configure LineRenderer appearance
-        lineRenderer.startWidth = 0.2f;
-        lineRenderer.endWidth = 0.2f;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startColor = Color.green;
-        lineRenderer.endColor = Color.green;
+        //// Configure LineRenderer appearance
+        //lineRenderer.startWidth = 0.2f;
+        //lineRenderer.endWidth = 0.2f;
+        //lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        //lineRenderer.startColor = Color.green;
+        //lineRenderer.endColor = Color.green;
     }
 }

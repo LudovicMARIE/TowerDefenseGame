@@ -34,7 +34,7 @@ public class TowerController : MonoBehaviour
             return;
         }
         InitializeLineRenderers();
-        CreateRange(gameObject);
+        //CreateRange(gameObject);
 
 
         if (rangeVisual != null)
@@ -82,15 +82,17 @@ public class TowerController : MonoBehaviour
         GameObject rangeSphere = Instantiate(rangeVisual, cylinder.transform.position, Quaternion.identity);
 
         // Calculate the scale based on the formula: 3 * X scale * CapsuleCollider radius
-        float calculatedScale = capsuleCollider.radius * 2 * 3;
+        float calculatedScale = capsuleCollider.radius * 2;
+        print("calculatedScale = " + capsuleCollider.radius + "*2 = " +calculatedScale);
+        print($"Parent Scale: {rangeSphere.transform.parent.localScale}");
 
         // Apply the calculated scale to the range sphere
-        rangeSphere.transform.localScale = new Vector3(calculatedScale, calculatedScale, calculatedScale);
+        rangeSphere.transform.localScale = new Vector3 (calculatedScale, calculatedScale, calculatedScale);
 
         // Optionally, parent the range sphere to the cylinder
         rangeSphere.transform.SetParent(cylinder.transform);
 
-        Debug.Log($"Range sphere created with scale: {calculatedScale}");
+        Debug.Log($"Range sphere created with scale: {rangeSphere.transform.localScale}");
     }
 
 
