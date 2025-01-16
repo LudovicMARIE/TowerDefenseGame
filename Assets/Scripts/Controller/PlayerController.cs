@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    #region Pause
+    #region ClickGame
 
     public void PauseGame()
     {
@@ -112,6 +113,12 @@ public class PlayerController : MonoBehaviour
             pauseMenuUI.SetActive(false); // Hide the pause menu
         }
         Debug.Log("Game Resumed");
+    }
+
+    public void RetryGame()
+    {
+        Debug.Log("Retry Game...");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()
