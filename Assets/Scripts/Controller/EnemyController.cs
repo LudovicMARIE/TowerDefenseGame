@@ -54,6 +54,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
+        FindAnyObjectByType<AudioManager>().PlaySound("Button2");
         foreach (var tower in towerControllers)
         {
             tower.RemoveEnemyFromRange(gameObject);

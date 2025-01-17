@@ -33,7 +33,7 @@ public class TowerController : MonoBehaviour
             Debug.LogError("No CapsuleCollider found on this GameObject!");
             return;
         }
-        InitializeLineRenderers();
+        //InitializeLineRenderers();
         //CreateRange(gameObject);
 
 

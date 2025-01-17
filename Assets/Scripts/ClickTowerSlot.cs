@@ -96,6 +96,7 @@ public class ClickTowerSlot : MonoBehaviour
     private void OnBuyButtonClicked()
     {
         Debug.Log($"Menu button clicked for TowerSlot: {gameObject.name}");
+        FindAnyObjectByType<AudioManager>().PlaySound("CoinUsed");
         CreateTower(); 
         Destroy(instantiatedMenu);
     }
@@ -103,11 +104,13 @@ public class ClickTowerSlot : MonoBehaviour
     private void chooseSniperTower()
     {
         towerToCreate = sniperTower;
+        FindAnyObjectByType<AudioManager>().PlaySound("Button1");
     }
 
     private void chooseMageTower()
     {
         towerToCreate = mageTower;
+        FindAnyObjectByType<AudioManager>().PlaySound("Button1");
     }
 
 

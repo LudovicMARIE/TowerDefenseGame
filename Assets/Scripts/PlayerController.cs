@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        FindAnyObjectByType<AudioManager>().PlaySound("BackgroundMusic");
         sceneManager = SceneManager.GetActiveScene().name;
         gold = 10;
         score = 0;
@@ -127,6 +128,7 @@ public class PlayerController : MonoBehaviour
 
     public void PauseGame()
     {
+        FindAnyObjectByType<AudioManager>().PlaySound("Button1");
         isPaused = true;
         Time.timeScale = 0f; // Freeze game time
         if (startMenuUI != null)
@@ -138,6 +140,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResumeGame()
     {
+        FindAnyObjectByType<AudioManager>().PlaySound("Button1");
         isPaused = false;
         Time.timeScale = 1f; // Resume game time
         if (startMenuUI != null)
@@ -159,6 +162,7 @@ public class PlayerController : MonoBehaviour
 
     public void RetryGame()
     {
+        FindAnyObjectByType<AudioManager>().PlaySound("Button1");
         SceneManager.LoadScene(sceneManager);
         Start();
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
