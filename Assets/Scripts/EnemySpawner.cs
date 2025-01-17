@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Transform spawnPoint; // Spawn position for enemies
     private List<GameObject> enemies = new List<GameObject>(); // List of alive enemies
+    public PlayerController playerController;
 
     void Start()
     {
@@ -30,9 +31,16 @@ public class EnemySpawner : MonoBehaviour
     {
         // Check if all enemies are destroyed to start the next wave
         enemies.RemoveAll(enemy => enemy == null); // Clean up null references
-        if (enemies.Count == 0 && waveNumber > 0)
+        if (playerController.isGameOver == false)
         {
-            StartWave();
+            if (enemies.Count == 0 && waveNumber >= 0)
+            {
+                StartWave();
+            }
+        }
+        else
+        {
+            waveNumber = 0;
         }
     }
 
@@ -63,6 +71,11 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < enemiesPerWave; i++)
         {
+            if (playerController.isGameOver == true)
+            {
+                i = 6;
+                break;
+            }
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
             enemies.Add(newEnemy);
 

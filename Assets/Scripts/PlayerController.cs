@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,23 +11,29 @@ public class PlayerController : MonoBehaviour
     public GameObject HUD;
     public GameObject gameOverUI;
 
-    private bool isGameOver = false;
+    public bool isGameOver = false;
 
     public int gold = 10; 
     public int score = 0;
     public int hp = 10;
     public int maxHP = 10;
 
-    public int waveNumber; 
+    private int waveNumber; 
     public int numberOfEnemies;
 
     public TextMeshProUGUI textMeshProHP; 
     public TextMeshProUGUI textMeshProGold;
+    private string sceneManager;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        sceneManager = SceneManager.GetActiveScene().name;
+        gold = 10;
+        score = 0;
+        hp = 10;
+        waveNumber = 0;
         gameOverUI.SetActive(false);
 
         textMeshProHP.text = "10/10";
@@ -148,6 +155,27 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Quitting Game...");
         Application.Quit(); // Quit the application
+    }
+
+    public void RetryGame()
+    {
+        SceneManager.LoadScene(sceneManager);
+        Start();
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        gameOverUI.SetActive(false);
+        Time.timeScale = 1f;
+        isGameOver = false;
+        HUD.SetActive(true);
+        gold = 10;
+        score = 0;
+        hp = 10;
+        waveNumber = 0;
+
     }
 
 
