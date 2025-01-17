@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
     public void RemoveGold(int amount)
     {
         gold -= amount;
+        FindObjectOfType<AudioManager>().PlaySound("Coins");
 
         textMeshProGold.text = gold.ToString();
     }
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             gameOverUI.SetActive(true);
             isGameOver = true;
+            FindObjectOfType<AudioManager>().PlaySound("GameOver");
         }
     }
 
